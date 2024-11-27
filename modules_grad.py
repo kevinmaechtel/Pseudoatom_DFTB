@@ -17,7 +17,7 @@ def read_skf_file(file: str) -> Tuple[List[List[float]], List[List[str]], List[s
     Args:
         file (str): The path to the SKF file to be read.
     Returns:
-        Tuple[List[List[float]], List[List[str]], List[str]]:
+        Tuple (List[List[float]], List[List[str]], List[str]):
             - H_S (List[List[float]]): The Hamiltonian and Overlap matrix extracted from the file.
             - header (List[List[str]]): The header lines of the file.
             - footer (List[str]): The footer lines of the file.
@@ -40,7 +40,6 @@ def read_skf_file(file: str) -> Tuple[List[List[float]], List[List[str]], List[s
             header.append(lines[i].split())
         # the first line of the header contains the number of elements in the H_S matrix
         len_HS = int(header[0][1].split(",")[0])
-        #print(len_HS)
 
         # the H_S matrix is the lines between the header and the footer and it is split into a list of lists and the list of the lists is len_HS long
         H_S = [lines[i].split() for i in range(len(header),
@@ -145,13 +144,13 @@ def convert_to_gen(geo_file: str) -> str:
     it to a .gen file.
 
     Parameters:
-    geo_file (str): The name of the geometry file to be converted.
+        geo_file (str): The name of the geometry file to be converted.
 
     Returns:
-    str: The name of the generated .gen file.
+        str: The name of the generated .gen file.
 
     Raises:
-    SystemExit: If the file does not exist or if the file extension is not one of the supported formats (.xyz, .pdb, .gro, .gen).
+        SystemExit: If the file does not exist or if the file extension is not one of the supported formats (.xyz, .pdb, .gro, .gen).
 
     Notes:
     - The function uses external tools like `xyz2gen` and `obabel` for file conversions.
@@ -187,11 +186,14 @@ def convert_to_gen(geo_file: str) -> str:
 # define a function, which gets as an input the path to the skf directory and the geometry file and the charge
 def create_hsd_Hub(skf_dir: str, geo_file: str, hsd_file: str) -> None:
     """Function creates the hsd file for the DFTB2 calculations
-    skf_dir = path to the skf directory (string)
-    geo_file = path to the geometry file (string)
-    hsd_file = path to the hsd file (string)
 
-    Returns nothing, but creates the hsd file"""
+    Parameters:
+        skf_dir (str): path to the skf directory
+        geo_file (str): path to the geometry file
+        hsd_file (str): path to the hsd file
+
+    Returns:
+        None: Writes the hsd file to the specified path"""
     hsd = """Geometry = GenFormat {
 <<<  '""" + geo_file + "'\n}"
     
@@ -248,10 +250,13 @@ Analysis = {
 # mefine a function, which reads two xyz files and matches the atoms in the two files by their positions
 def match_xyz(xyz1: str, xyz2: str) -> List[tuple]:
     """Function reads two xyz files and matches the atoms in the two files by their positions
-    xyz1 = path to the first xyz file (string)
-    xyz2 = path to the second xyz file (string)
 
-    Returns a list of tuples containing the indices of the matched atoms"""
+    Parameters:
+        xyz1 (str): path to the first xyz file
+        xyz2 (str): path to the second xyz file
+
+    Returns:
+        List[tuple]: indices of the matched atoms"""
     # read the xyz files
     with open(xyz1, 'r') as f:
         next(f)
@@ -289,11 +294,12 @@ def match_xyz(xyz1: str, xyz2: str) -> List[tuple]:
 def read_eigenvectors(file: str, MO: int) -> List[List[float]]:
     """Function reads the eigenvectors from a file and normalizes them
     
-    Args:
-        file = path to the file containing the eigenvectors (string)
-        MO = number of the molecular orbital (int)
+    Parameters:
+        file (str): path to the file containing the eigenvectors
+        MO (int): number of the molecular orbital
     
-    Returns the eigenvectors as a list of lists"""
+    Returns:
+        List[List[float]]: Eigenvectors"""
 
     with open(file, 'r') as f:
         lines = f.readlines()
@@ -313,11 +319,14 @@ def read_eigenvectors(file: str, MO: int) -> List[List[float]]:
 # define a function which calculates the rmsd between two vectors of atomic charges
 def rmsd(charges1: List[float], charges2: List[float], matched_atoms: List[tuple]) -> float:
     """Function calculates the rmsd between two vectors of atomic charges
-    charges1 = vector of atomic charges for the first molecule (list of floats)
-    charges2 = vector of atomic charges for the second molecule (list of floats)
-    matched_atoms = list of tuples containing the indices of the matched atoms (list of tuples)
 
-    Returns the rmsd between the two vectors of atomic charges"""
+    Parameters:
+        charges1 (List[float]): vector of atomic charges for the first molecule
+        charges2 (List[float]): vector of atomic charges for the second molecule
+        matched_atoms (List[tuple]): list of tuples containing the indices of the matched atoms
+
+    Returns:
+        float: rmsd between the two vectors of atomic charges"""
     # calculate the rmsd based on the matched atoms
     rmsd = 0
     for i, j in matched_atoms:
@@ -328,11 +337,14 @@ def rmsd(charges1: List[float], charges2: List[float], matched_atoms: List[tuple
 # define a function, which runs the dftb+ calculation for both the neutral and the charged system
 def run_dftb_Hub(skf_dir: str, hsd_file: str, geom_file: str) -> Tuple[float , float , List[float], List[float], List[float]]:
     """Function runs the dftb+ (DFTB2) calculation for both the neutral and the charged system
-    skf_dir = path to the skf directory (string)
-    hsd_file = path to the hsd file (string)
-    geom_file = path to the geometry file (string)
 
-    Returns the ionization potential, the electron affinity and the atomic charges"""
+    Parameters:
+        skf_dir (str): path to the skf directory
+        hsd_file (str): path to the hsd file
+        geom_file (str): path to the geometry file
+
+    Returns:
+        Tuple (float, float, List[float], List[float], List[float]): ionization potential, electron affinity, atomic charges, eigenvector of the HOMO and LUMO"""
     # convert the geometry file to a gen file
     geom_file = convert_to_gen(geom_file)
     # create the hsd file for the neutral system
@@ -455,7 +467,7 @@ def single_Hubbard(Energy_p: float, Energy_s: float, Hubbard_p: float, Hubbard_s
     Calculates the delta IP, delta EA, delta RMSD, and the Hubbard parameters between the pseudo and non-pseudo system.
     """
     # round the Hubbard U parameter and the Energy_s parameter to three decimal places
-    Energy_p = round(Energy_p, 6)
+    Energy_p = round(Energy_p, 6)       # round to sixth decimal place, for shorter file names
     Energy_s = round(Energy_s, 6)
     Hubbard_p = round(Hubbard_p, 6)
     Hubbard_s = round(Hubbard_s, 6)
@@ -898,7 +910,7 @@ def plot_Hubbard(function: List[List[float]], Hubbard_p_IP: float, Hubbard_s_IP:
         Hubbard_s_EA (float): Hubbard U of the s Orbital for the Electron Affinity
     
     Returns:
-        None, but creates and saves the plots
+        None: but creates and saves the plots
     """
     # plot the function in 2D with the Hubbard U and Energy_s parameters on the x and y axes and the Fit value on the z axis as a color map
     x = [element[2] for element in function]
