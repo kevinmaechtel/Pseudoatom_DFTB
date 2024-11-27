@@ -20,20 +20,20 @@ This repository contains the script for optimization of the pseudoatom parameter
 ## Usage
 
 1. Clone the repository:
-        ```bash
+        ```
         git clone https://github.com/kevinmaechtel/Pseudoatom_DFTB
         ```
 2. Navigate to the directory:
-        ```bash
+        ```
         cd Pseudoatom_DFTB
         ```
 3. Install the required dependencies:
-        ```bash
+        ```
         pip install -r requirements.txt
         ```
 4. Run the scripts as needed:
-        ```bash
-        ./run_opt.sh <geometry_containing_linker_atom> <geometry_containing_pseudo_atom> <name_pseudo_atom>
+        ```
+        bash run_opt.sh <geometry_containing_linker_atom> <geometry_containing_pseudo_atom> <name_pseudo_atom>
         ```
 
 ## Contact
