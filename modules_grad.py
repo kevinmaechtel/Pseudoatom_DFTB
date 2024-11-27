@@ -50,25 +50,6 @@ def read_skf_file(file: str) -> Tuple[List[List[float]], List[List[str]], List[s
         footer = lines[len(header) + len_HS:]
     return H_S, header, footer
 
-# define a function, which adjusts the H_S matrix, to only have the 7th and 17th element of the original and the rest to be 0
-def adjust_H_S(H_S: List[List[float]], factor: float) -> List[List[float]]:
-    """
-    Multiplies all elements of the H_S matrix by a given factor.
-
-    Args:
-        H_S (List[List[float]]): The Hamiltonian and Overlap matrix to be adjusted.
-        factor (float): The factor by which each element of the H_S matrix will be multiplied.
-
-    Returns:
-        List[List[float]]: The adjusted H_S matrix with each element multiplied by the given factor.
-    """
-    # loop through the H_S matrix
-    for i in range(len(H_S)):
-        for j in range(len(H_S[i])):
-            # multiply the elememt with the factor
-            H_S[i][j] = str(float(H_S[i][j]) * factor)
-    return H_S
-
 # define a function, which manipulates only the hubbard of the s and p orbitals
 def manipulate_spl_Hubbard(original_dir: str, new_dir: str, Hubbard_s: float, Hubbard_p: float, Energy_p: float, Energy_s: float, el: str, elements: List[str]) -> None:
     """
