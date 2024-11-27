@@ -21,11 +21,11 @@ This repository contains the script for optimization of the pseudoatom parameter
 
 1. Clone the repository:
         ```bash
-        git clone https://github.com/yourusername/your-repo.git
+        git clone https://github.com/kevinmaechtel/Pseudoatom_DFTB
         ```
 2. Navigate to the directory:
         ```bash
-        cd your-repo
+        cd Pseudoatom_DFTB
         ```
 3. Install the required dependencies:
         ```bash
