@@ -17,11 +17,13 @@ cwd = os.getcwd()
 files = os.listdir(cwd)
 
 # filter the files to only include the .spl files
+# edit with the correct ending of your Slater-Koster files
 files = [f for f in files if f.endswith('.spl')]
 
 # loop over the files, which contain only one c in the first two characters of the filename
 for f in files:
     # get the first two characters of the filename
+    # edit with the correct namin of your files
     first_two = f[:2]
     # if the first two characters are c
     if 'c' in first_two and not 'cc' in first_two and not pseudo_atom in first_two:
@@ -44,12 +46,12 @@ for f in files:
         lines[1][0] = '0.000000000000E+00'
         lines[1] = '  '.join(lines[1])+'\n'
         # write the file, by replacing the first c with the pseudo atom
-        with open(f[0].replace('c', pseudo_atom)+f[1:], 'w') as file:
+        with open(f[0].replace('c', pseudo_atom)+f[1:], 'w') as file:  #edit with the correct naming
             file.writelines(lines)
             file.close()
-        print(f[0].replace('c', pseudo_atom)+f[1:])
+        print(f[0].replace('c', pseudo_atom)+f[1:])  # edit with the correct naming
         # additionaly save the file with the second c replaced by the pseudo atom
-        with open(f[0]+f[1].replace('c', pseudo_atom)+f[2:], 'w') as file:
+        with open(f[0]+f[1].replace('c', pseudo_atom)+f[2:], 'w') as file:  #edit with the correct naming
             file.writelines(lines)
             file.close()
-        print(f[0]+f[1].replace('c', pseudo_atom)+f[2:])
+        print(f[0]+f[1].replace('c', pseudo_atom)+f[2:]) # edit with the correct naming
