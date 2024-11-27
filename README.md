@@ -33,7 +33,7 @@ This repository contains the script for optimization of the pseudoatom parameter
         ```
 4. Run the scripts as needed:
         ```bash
-        bash run_opt.sh <geometry_containing_linker_atom> <geometry_containing_pseudo_atom> <name_pseudo_atom>
+        ./run_opt.sh <geometry_containing_linker_atom> <geometry_containing_pseudo_atom> <name_pseudo_atom>
         ```
 
 ## Contact
