@@ -4,7 +4,7 @@ import numpy as np
 import sys
 import datetime
 
-# define the range of the Hubbard U and Energy_s parameters
+# define the range of the Hubbard and orbital Energy parameters
 Energy_p_min = -5.0
 Energy_p_max = 5.0
 Energy_s_min = -5.0
@@ -17,7 +17,7 @@ num_points = 100000
 
 # check if the correct number of arguments is given
 if len(sys.argv) != 4:
-    print(f"Usage: {sys.argv[0]} <original_file> <pseudo_file> <pseudo_symbol>")
+    print(f"Usage: python3 {sys.argv[0]} <original_file> <pseudo_file> <pseudo_symbol>")
     print('Please provide the path to the original and pseudo geometry files')
     print('The pseudo atom will one electron in the s and no electrons in the p orbital.')
     exit()
