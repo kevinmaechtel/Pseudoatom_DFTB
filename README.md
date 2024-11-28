@@ -16,6 +16,7 @@ This repository contains the script for optimization of the pseudoatom parameter
 
 - Python (3.11 or newer)
 - DFTB+
+- Openbabel
 
 ## Usage
 
