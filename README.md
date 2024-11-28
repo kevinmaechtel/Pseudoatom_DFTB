@@ -1,6 +1,6 @@
 # README
 
-This repository contains the script for optimization of the pseudoatom parameters for my Master's thesis.
+This repository contains the script for optimization of the pseudoatom parameters from my Master's thesis.
 
 ## Files
 
